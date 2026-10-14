@@ -109,7 +109,7 @@ public sealed class Plugin : IDalamudPlugin
 
     private void Mute()
     {
-        if (!GameConfig.System.TryGet(SystemConfigOption.SoundEnv, out uint current))
+        if (!GameConfig.TryGet(SystemConfigOption.SoundEnv, out uint current))
         {
             Log.Warning("Could not read the ambient volume option; not muting.");
             return;
@@ -118,7 +118,7 @@ public sealed class Plugin : IDalamudPlugin
         // Don't overwrite a good saved value with 0 if something else already muted it.
         if (current > 0) config.SavedVolume = current;
 
-        GameConfig.System.Set(SystemConfigOption.SoundEnv, 0u);
+        GameConfig.Set(SystemConfigOption.SoundEnv, 0u);
         config.IsMuted = true;
         belowSince = DateTime.MinValue;
         Save();
@@ -127,7 +127,7 @@ public sealed class Plugin : IDalamudPlugin
 
     private void Restore()
     {
-        GameConfig.System.Set(SystemConfigOption.SoundEnv, config.SavedVolume);
+        GameConfig.Set(SystemConfigOption.SoundEnv, config.SavedVolume);
         config.IsMuted = false;
         belowSince = DateTime.MinValue;
         Save();
