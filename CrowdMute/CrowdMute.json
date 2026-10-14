@@ -1,0 +1,9 @@
+{
+  "Author": "you",
+  "Name": "Crowd Mute",
+  "InternalName": "CrowdMute",
+  "Punchline": "Mutes ambient sound when it gets crowded.",
+  "Description": "Counts nearby players and sets the Ambient Sounds volume to 0 when the count passes a threshold, then restores your volume when the area clears.",
+  "Tags": [ "sound", "ambient", "crowd" ],
+  "ApplicableVersion": "any"
+}
