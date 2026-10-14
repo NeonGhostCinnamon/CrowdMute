@@ -16,6 +16,7 @@
   "LoadSync": false,
   "CanUnloadAsync": false,
   "LoadPriority": 0,
+  "IconUrl": "https://raw.githubusercontent.com/NeonGhostCinnamon/CrowdMute/master/CrowdMute/images/icon.png",
   "Punchline": "Mutes ambient sound when it gets crowded.",
   "AcceptsFeedback": true
 }

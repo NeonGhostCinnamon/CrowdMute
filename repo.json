@@ -1,0 +1,23 @@
+[
+  {
+    "Author": "NeonGhostCinnamon",
+    "Name": "Crowd Mute",
+    "InternalName": "CrowdMute",
+    "AssemblyVersion": "1.0.0.0",
+    "Description": "Counts nearby players and sets the Ambient Sounds volume to 0 when the count passes a threshold, then restores your volume when the area clears. Settings: /crowdmute",
+    "ApplicableVersion": "any",
+    "RepoUrl": "https://github.com/NeonGhostCinnamon/CrowdMute",
+    "Tags": [ "sound", "ambient", "crowd" ],
+    "DalamudApiLevel": 15,
+    "LoadPriority": 0,
+    "IsHide": false,
+    "IsTestingExclusive": false,
+    "Punchline": "Mutes ambient sound when it gets crowded.",
+    "IconUrl": "https://raw.githubusercontent.com/NeonGhostCinnamon/CrowdMute/master/CrowdMute/images/icon.png",
+    "DownloadCount": 0,
+    "LastUpdate": 0,
+    "DownloadLinkInstall": "https://github.com/NeonGhostCinnamon/CrowdMute/releases/latest/download/CrowdMute.zip",
+    "DownloadLinkTesting": "https://github.com/NeonGhostCinnamon/CrowdMute/releases/latest/download/CrowdMute.zip",
+    "DownloadLinkUpdate": "https://github.com/NeonGhostCinnamon/CrowdMute/releases/latest/download/CrowdMute.zip"
+  }
+]

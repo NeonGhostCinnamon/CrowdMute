@@ -1,0 +1,71 @@
+name: Release
+
+# Push a tag like v1.0.0.1 to build the plugin, publish a GitHub Release,
+# and update repo.json with the new version.
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Download Dalamud
+        shell: pwsh
+        run: |
+          Invoke-WebRequest -Uri https://goatcorp.github.io/dalamud-distrib/latest.zip -OutFile latest.zip
+          Expand-Archive -Force latest.zip "$env:AppData\XIVLauncher\addon\Hooks\dev\"
+
+      - name: Build
+        shell: bash
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+          dotnet build CrowdMute/CrowdMute.csproj -c Release -p:Version="$VERSION"
+
+      - name: Find packaged zip
+        shell: bash
+        run: |
+          ZIP=$(find CrowdMute/bin -name latest.zip | head -n 1)
+          if [ -z "$ZIP" ]; then
+            echo "No latest.zip found. Contents of CrowdMute/bin:"
+            find CrowdMute/bin -type f
+            exit 1
+          fi
+          cp "$ZIP" CrowdMute.zip
+          echo "Packaged: $ZIP"
+
+      - name: Create GitHub Release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" CrowdMute.zip \
+            --title "Crowd Mute $VERSION" --generate-notes
+
+      - name: Update repo.json
+        shell: bash
+        run: |
+          BRANCH="${{ github.event.repository.default_branch }}"
+          git fetch origin "$BRANCH"
+          git checkout "$BRANCH"
+          jq --arg v "$VERSION" --argjson t "$(date +%s)" \
+            '.[0].AssemblyVersion = $v | .[0].LastUpdate = $t' repo.json > repo.tmp
+          mv repo.tmp repo.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add repo.json
+          git commit -m "Update repo.json for $VERSION" || echo "No changes"
+          git push origin "$BRANCH"
