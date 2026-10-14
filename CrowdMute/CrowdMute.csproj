@@ -1,19 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Dalamud.NET.Sdk/15.0.0">
   <PropertyGroup>
-    <Version>0.1</Version>
-    <Author>Will-o-Cinnamon</Author>
-    <Name>Crowd Mute</Name>
-    <Punchline>Shut up all them annoyin crowds</Punchline>
-    <Description>Gives several options to turn off the ambient sound track to remove the crowd noises.</Description>
-    <RepoUrl>https://github.com/NeonGhostCinnamon/</RepoUrl>
-    <Tags>crowd;noise;mute;cinnamon</Tags>
+    <Version>1.0.0.0</Version>
+    <Description>Mutes the Ambient Sounds channel when many players are nearby.</Description>
+    <PackageProjectUrl>https://github.com/NeonGhostCinnamon/CrowdMute</PackageProjectUrl>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="..\Data\goat.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Visible>false</Visible>
-    </Content>
+    <!-- Copies the icon next to the DLL and manifest in the build output. -->
+    <Content Include="images\icon.png" CopyToOutputDirectory="PreserveNewest" Visible="false" />
   </ItemGroup>
 </Project>
