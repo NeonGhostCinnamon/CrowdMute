@@ -3,7 +3,7 @@
     "Author": "NeonGhostCinnamon",
     "Name": "Crowd Mute",
     "InternalName": "CrowdMute",
-    "AssemblyVersion": "1.0.0.0",
+    "AssemblyVersion": "2.0.4.0",
     "Description": "Tired of annoying crowd noises and voices? CrowdMute will mute the ambient music track depending on the configuration.",
     "ApplicableVersion": "any",
     "RepoUrl": "https://github.com/NeonGhostCinnamon/CrowdMute",
