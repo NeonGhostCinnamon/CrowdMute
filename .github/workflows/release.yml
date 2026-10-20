@@ -36,7 +36,13 @@ jobs:
       - name: Package
         run: |
           mkdir package
-          cp -r bin\Release\CrowdMute\* package\
+          # Copy DLLs and deps directly into the package root (not inside latest.zip)
+          Copy-Item bin\Release\CrowdMute.dll package\
+          Copy-Item bin\Release\CrowdMute.json package\
+          Copy-Item bin\Release\CrowdMute.deps.json package\
+          Copy-Item bin\Release\FontAwesome5.dll package\
+          Copy-Item bin\Release\FontAwesome5.Net.dll package\
+          Copy-Item -Recurse bin\Release\images package\
           cd package
           7z a ../CrowdMute.zip .
         shell: pwsh
