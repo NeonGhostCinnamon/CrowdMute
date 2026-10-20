@@ -10,32 +10,36 @@ permissions:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: windows-2022
+
+    env:
+      Solution_Name: CrowdMute
 
     steps:
       - name: Checkout
         uses: actions/checkout@v5
 
-      - name: Setup .NET
+      - name: Install .NET
         uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: '9.0.x'
+          dotnet-version: 10.0.x
 
-      - name: Restore
-        run: dotnet restore
+      - name: Download Dalamud
+        run: |
+          Invoke-WebRequest -Uri https://goatcorp.github.io/dalamud-distrib/latest.zip -OutFile latest.zip
+          Expand-Archive -Force latest.zip "$env:AppData\XIVLauncher\addon\Hooks\dev"
+        shell: pwsh
 
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build --configuration Release
 
       - name: Package
         run: |
           mkdir package
-          cp bin/Release/CrowdMute.dll package/
-          cp -r bin/Release/CrowdMute package/
-          cp -r images package/
+          cp -r bin\Release\CrowdMute\* package\
           cd package
           7z a ../CrowdMute.zip .
-        shell: bash
+        shell: pwsh
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
