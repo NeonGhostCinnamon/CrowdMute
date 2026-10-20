@@ -21,29 +21,6 @@ jobs:
         with:
           dotnet-version: '9.0.x'
 
-      - name: Download Dalamud SDK
-        run: |
-          $url = "https://repo.dalamud.dev/Packager.Latest.zip"
-          Invoke-WebRequest -Uri $url -OutFile Packager.Latest.zip
-          Expand-Archive -Path Packager.Latest.zip -DestinationPath dalamud-sdk -Force
-        shell: pwsh
-
-      - name: Add Dalamud NuGet source
-        run: |
-          $pkgPath = "${{ github.workspace }}/dalamud-sdk/Packager"
-          $nugetConfig = @'
-          <configuration>
-            <packageSources>
-              <clear />
-              <add key="nuget" value="https://api.nuget.org/v3/index.json" />
-              <add key="dalamud" value="$env:PKG_PATH/Packager" />
-            </packageSources>
-          </configuration>
-          '@
-          $nugetConfig = $nugetConfig -replace '\$env:PKG_PATH', $pkgPath
-          Set-Content -Path nuget.config -Value $nugetConfig
-        shell: pwsh
-
       - name: Restore
         run: dotnet restore
 
