@@ -1,0 +1,11 @@
+{
+  "Author": "NeonGhostCinnamon",
+  "Name": "Crowd Mute",
+  "InternalName": "CrowdMute",
+  "Punchline": "Tired of annoying crowd noises and voices? CrowdMute will mute the ambient music track depending on the configuration.",
+  "Description": "Tired of annoying crowd noises and voices? CrowdMute will mute the ambient music track depending on the configuration.",
+  "Tags": [ "sound", "ambient", "crowd" ],
+  "RepoUrl": "https://github.com/NeonGhostCinnamon/CrowdMute",
+  "IconUrl": "https://raw.githubusercontent.com/NeonGhostCinnamon/CrowdMute/master/images/icon.png",
+  "ApplicableVersion": "any"
+}

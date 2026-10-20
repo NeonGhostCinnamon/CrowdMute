@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "PLwmZFMvFes=",
+  "success": true,
+  "projectFilePath": "F:\\Repos\\FFXIV\\CrowdMute\\CrowdMute.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Chloe\\.nuget\\packages\\dalamudpackager\\15.0.0\\dalamudpackager.15.0.0.nupkg.sha512",
+    "C:\\Users\\Chloe\\.nuget\\packages\\dotnet.reproduciblebuilds\\1.2.39\\dotnet.reproduciblebuilds.1.2.39.nupkg.sha512",
+    "C:\\Users\\Chloe\\.nuget\\packages\\fontawesome5\\2.1.11\\fontawesome5.2.1.11.nupkg.sha512"
+  ],
+  "logs": []
+}

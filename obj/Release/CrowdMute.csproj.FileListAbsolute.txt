@@ -1,0 +1,13 @@
+F:\Repos\FFXIV\CrowdMute\bin\Release\images\icon.png
+F:\Repos\FFXIV\CrowdMute\bin\Release\images\crowdmute_icon.png
+F:\Repos\FFXIV\CrowdMute\bin\Release\CrowdMute.deps.json
+F:\Repos\FFXIV\CrowdMute\bin\Release\CrowdMute.dll
+F:\Repos\FFXIV\CrowdMute\bin\Release\FontAwesome5.Net.dll
+F:\Repos\FFXIV\CrowdMute\bin\Release\FontAwesome5.dll
+F:\Repos\FFXIV\CrowdMute\obj\Release\CrowdMute.csproj.AssemblyReference.cache
+F:\Repos\FFXIV\CrowdMute\obj\Release\CrowdMute.GeneratedMSBuildEditorConfig.editorconfig
+F:\Repos\FFXIV\CrowdMute\obj\Release\CrowdMute.AssemblyInfoInputs.cache
+F:\Repos\FFXIV\CrowdMute\obj\Release\CrowdMute.AssemblyInfo.cs
+F:\Repos\FFXIV\CrowdMute\obj\Release\CrowdMute.csproj.CoreCompileInputs.cache
+F:\Repos\FFXIV\CrowdMute\obj\Release\CrowdMute.csproj.Up2Date
+F:\Repos\FFXIV\CrowdMute\obj\Release\CrowdMute.dll
