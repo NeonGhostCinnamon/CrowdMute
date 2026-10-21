@@ -30,9 +30,21 @@ jobs:
 
       - name: Sync repo.json AssemblyVersion
         run: |
+          $version = "${{ steps.version.outputs.VERSION }}"
+          if ([string]::IsNullOrWhiteSpace($version)) {
+            Write-Error "VERSION is empty!"
+            exit 1
+          }
+          $fullVersion = "$version.0"
+          Write-Host "Syncing AssemblyVersion to $fullVersion"
+          # Use jq to only modify the AssemblyVersion field — preserves array wrapper and formatting
           $json = Get-Content repo.json -Raw | ConvertFrom-Json
-          $json[0].AssemblyVersion = "${{ steps.version.outputs.VERSION }}.0"
-          $json | ConvertTo-Json -Depth 10 | Set-Content repo.json
+          if ($json.Count -eq 0 -or $json[0].AssemblyVersion -eq $fullVersion) {
+            Write-Host "No changes needed"
+          } else {
+            $json[0].AssemblyVersion = $fullVersion
+            $json | ConvertTo-Json -Depth 10 | Set-Content repo.json
+          }
         shell: pwsh
 
       - name: Commit synced repo.json
