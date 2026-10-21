@@ -1,26 +1,24 @@
-[
-  {
-    "Author": "NeonGhostCinnamon",
-    "Name": "Crowd Mute",
-    "InternalName": "CrowdMute",
-    "AssemblyVersion": "2.0.4.0",
-    "Description": "Tired of annoying crowd noises and voices? CrowdMute will mute the ambient music track depending on the configuration.",
-    "ApplicableVersion": "any",
-    "RepoUrl": "https://github.com/NeonGhostCinnamon/CrowdMute",
-    "Tags": [
-      "sound",
-      "ambient",
-      "crowd"
-    ],
-    "DalamudApiLevel": 15,
-    "LoadPriority": 0,
-    "IsHide": false,
-    "IsTestingExclusive": false,
-    "Punchline": "Tired of annoying crowd noises and voices? CrowdMute will mute the ambient music track depending on the configuration.",
-    "IconUrl": "https://raw.githubusercontent.com/NeonGhostCinnamon/CrowdMute/master/images/icon.png",
-    "DownloadCount": 0,
-    "DownloadLinkInstall": "https://github.com/NeonGhostCinnamon/CrowdMute/releases/latest/download/CrowdMute.zip",
-    "DownloadLinkTesting": "https://github.com/NeonGhostCinnamon/CrowdMute/releases/latest/download/CrowdMute.zip",
-    "DownloadLinkUpdate": "https://github.com/NeonGhostCinnamon/CrowdMute/releases/latest/download/CrowdMute.zip"
-  }
-]
+{
+  "Author": "NeonGhostCinnamon",
+  "Name": "Crowd Mute",
+  "InternalName": "CrowdMute",
+  "AssemblyVersion": ".0",
+  "Description": "Tired of annoying crowd noises and voices? CrowdMute will mute the ambient music track depending on the configuration.",
+  "ApplicableVersion": "any",
+  "RepoUrl": "https://github.com/NeonGhostCinnamon/CrowdMute",
+  "Tags": [
+    "sound",
+    "ambient",
+    "crowd"
+  ],
+  "DalamudApiLevel": 15,
+  "LoadPriority": 0,
+  "IsHide": false,
+  "IsTestingExclusive": false,
+  "Punchline": "Tired of annoying crowd noises and voices? CrowdMute will mute the ambient music track depending on the configuration.",
+  "IconUrl": "https://raw.githubusercontent.com/NeonGhostCinnamon/CrowdMute/master/images/icon.png",
+  "DownloadCount": 0,
+  "DownloadLinkInstall": "https://github.com/NeonGhostCinnamon/CrowdMute/releases/latest/download/CrowdMute.zip",
+  "DownloadLinkTesting": "https://github.com/NeonGhostCinnamon/CrowdMute/releases/latest/download/CrowdMute.zip",
+  "DownloadLinkUpdate": "https://github.com/NeonGhostCinnamon/CrowdMute/releases/latest/download/CrowdMute.zip"
+}
