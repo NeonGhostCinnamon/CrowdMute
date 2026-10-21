@@ -11,7 +11,5 @@
     <Content Include="images\crowdmute_icon.png" CopyToOutputDirectory="PreserveNewest" Visible="false" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="FontAwesome5" Version="*" />
-  </ItemGroup>
+
 </Project>
