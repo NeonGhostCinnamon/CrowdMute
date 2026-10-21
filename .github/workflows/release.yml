@@ -18,10 +18,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - name: Extract version from tag
         id: version
-        run: echo "VERSION=${GITHUB_REF_NAME#v}" >> $env:GITHUB_OUTPUT
+        run: |
+          $tag = git describe --tags --exact-match 2>$null || git tag --points-at HEAD | Select-Object -First 1
+          $version = $tag -replace '^v', ''
+          echo "VERSION=$version" >> $env:GITHUB_OUTPUT
 
       - name: Sync repo.json AssemblyVersion
         run: |
