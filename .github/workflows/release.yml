@@ -37,13 +37,15 @@ jobs:
           }
           $fullVersion = "$version.0"
           Write-Host "Syncing AssemblyVersion to $fullVersion"
-          # Use jq to only modify the AssemblyVersion field — preserves array wrapper and formatting
-          $json = Get-Content repo.json -Raw | ConvertFrom-Json
-          if ($json.Count -eq 0 -or $json[0].AssemblyVersion -eq $fullVersion) {
+          # Use regex to only replace the AssemblyVersion value — preserves array wrapper and formatting
+          $content = Get-Content repo.json -Raw
+          $pattern = '("AssemblyVersion"\s*:\s*")([^"]+)"'
+          $newContent = $content -replace $pattern, '"AssemblyVersion": "$fullVersion"'
+          if ($content -eq $newContent) {
             Write-Host "No changes needed"
           } else {
-            $json[0].AssemblyVersion = $fullVersion
-            $json | ConvertTo-Json -Depth 10 | Set-Content repo.json
+            Set-Content repo.json -Value $newContent -NoNewline
+            Write-Host "Updated AssemblyVersion"
           }
         shell: pwsh
 
