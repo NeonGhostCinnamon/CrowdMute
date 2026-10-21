@@ -29,23 +29,33 @@ jobs:
           echo "VERSION=$version" >> $env:GITHUB_OUTPUT
 
       - name: Sync repo.json AssemblyVersion
+        env:
+          FULL_VERSION: "${{ steps.version.outputs.VERSION }}.0"
         run: |
-          $version = "${{ steps.version.outputs.VERSION }}"
-          if ([string]::IsNullOrWhiteSpace($version)) {
+          $fullVersion = $env:FULL_VERSION
+          if ([string]::IsNullOrWhiteSpace($fullVersion)) {
             Write-Error "VERSION is empty!"
             exit 1
           }
-          $fullVersion = "$version.0"
           Write-Host "Syncing AssemblyVersion to $fullVersion"
-          # Use regex to only replace the AssemblyVersion value — preserves array wrapper and formatting
-          $content = Get-Content repo.json -Raw
-          $pattern = '("AssemblyVersion"\s*:\s*")([^"]+)"'
-          $newContent = $content -replace $pattern, '"AssemblyVersion": "$fullVersion"'
-          if ($content -eq $newContent) {
-            Write-Host "No changes needed"
-          } else {
-            Set-Content repo.json -Value $newContent -NoNewline
+          # Read lines, replace only the AssemblyVersion line — preserves [ ] wrapper and all formatting
+          $lines = Get-Content repo.json
+          $updated = $false
+          $result = foreach ($line in $lines) {
+            if ($line -match '"AssemblyVersion"\s*:\s*"([^"]+)"') {
+              Write-Host "Found AssemblyVersion: $($matches[1])"
+              $line -replace '"AssemblyVersion"\s*:\s*"[^"]+"', '"AssemblyVersion": "$fullVersion"'
+              $updated = $true
+            } else {
+              $line
+            }
+          }
+          if ($updated) {
+            $result | Set-Content repo.json
             Write-Host "Updated AssemblyVersion"
+          } else {
+            Write-Host "AssemblyVersion line not found!"
+            exit 1
           }
         shell: pwsh
 
