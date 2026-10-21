@@ -46,6 +46,11 @@ jobs:
           fi
 
           echo "Syncing AssemblyVersion to $FULL_VERSION"
+          # Guard: ensure repo.json is an array — fail if it's a bare object
+          if ! head -c 1 repo.json | grep -q '\['; then
+            echo "ERROR: repo.json must start with [ (array wrapper). Fix it first."
+            exit 1
+          fi
           jq --arg v "$FULL_VERSION" '.[0].AssemblyVersion = $v' repo.json > tmp.json && mv tmp.json repo.json
           echo "Updated AssemblyVersion"
 
