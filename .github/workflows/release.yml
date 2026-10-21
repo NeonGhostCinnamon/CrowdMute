@@ -19,10 +19,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
-      - name: Install .NET
-        uses: actions/setup-dotnet@v5
-        with:
-          dotnet-version: 10.0.x
+      - name: Extract version from tag
+        id: version
+        run: echo "VERSION=${GITHUB_REF_NAME#v}" >> $env:GITHUB_OUTPUT
+
+      - name: Sync repo.json AssemblyVersion
+        run: |
+          $json = Get-Content repo.json -Raw | ConvertFrom-Json
+          $json[0].AssemblyVersion = "${{ steps.version.outputs.VERSION }}.0"
+          $json | ConvertTo-Json -Depth 10 | Set-Content repo.json
+        shell: pwsh
+
+      - name: Commit synced repo.json
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add repo.json
+          git commit -m "Sync AssemblyVersion to ${{ steps.version.outputs.VERSION }}.0" || echo "No changes to commit"
+          git push || echo "No changes to push"
+        shell: pwsh
 
       - name: Download Dalamud
         run: |
