@@ -38,20 +38,13 @@ jobs:
             exit 1
           }
           Write-Host "Syncing AssemblyVersion to $fullVersion"
-          # Read lines, replace only the AssemblyVersion line — preserves [ ] wrapper and all formatting
-          $lines = Get-Content repo.json
-          $updated = $false
-          $result = foreach ($line in $lines) {
-            if ($line -match '"AssemblyVersion"\s*:\s*"([^"]+)"') {
-              Write-Host "Found AssemblyVersion: $($matches[1])"
-              $line -replace '"AssemblyVersion"\s*:\s*"[^"]+"', '"AssemblyVersion": "$fullVersion"'
-              $updated = $true
-            } else {
-              $line
-            }
-          }
-          if ($updated) {
-            $result | Set-Content repo.json
+          # Read as raw text, replace only the version value — preserves [ ] wrapper and all formatting
+          $content = Get-Content repo.json -Raw
+          $old = [regex]::Match($content, '"AssemblyVersion"\s*:\s*"[^"]+"').Value
+          if ($content.Contains($old)) {
+            $new = '"AssemblyVersion": \"' + $fullVersion + '\"'
+            $content = $content.Replace($old, $new)
+            Set-Content repo.json -Value $content -NoNewline
             Write-Host "Updated AssemblyVersion"
           } else {
             Write-Host "AssemblyVersion line not found!"
